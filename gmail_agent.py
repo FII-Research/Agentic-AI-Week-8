@@ -18,3 +18,26 @@ def gmail_reader_agent():
     )
         
     return agent
+
+def email_drafter_agent():
+    llm = LLM(
+        model="groq/llama-3.3-70b-versatile",
+        temperature=0.7
+    )
+    
+    agent = Agent(
+        role="Selective Email Responder",
+        goal="Draft professional responses ONLY for important emails that require action",
+        backstory=dedent('''You are a highly efficient email communication specialist who focuses exclusively on 
+                  responding to important emails. You understand that your time is valuable and should not be wasted 
+                  on spam, marketing messages, or FYI emails that don't require a response. You have an excellent 
+                  ability to craft concise, effective responses to genuinely important communications.
+                  
+                  You prioritize emails marked as "Important" or "Urgent" by the email analyzer and ignore 
+                  everything categorized as "Spam/Marketing" or "FYI". Your responses are professional, 
+                  targeted to the specific needs of each important email, and designed to efficiently resolve
+                  the matter at hand.'''),
+        llm=llm,
+    )
+    
+    return agent

@@ -1,5 +1,6 @@
 from langchain_google_community import GmailToolkit
 from langchain_google_community.gmail.search import GmailSearch
+from langchain_google_community.gmail.create_draft import GmailCreateDraft
 from langchain_google_community.gmail.utils import (
         build_resource_service, get_gmail_credentials
     )
@@ -17,6 +18,12 @@ api_resource = build_resource_service(credentials=credentials)
 # https://api.python.langchain.com/en/latest/_modules/langchain_community/tools/gmail/search.html#GmailSearch
 
 def fetch_mail():
+    '''
+    Fetch emails from gmail inbox
+
+    Returns:
+        list of dicts: Information from latest 10 emails 
+    '''
 
     search = GmailSearch(api_resource=api_resource)
 
@@ -26,9 +33,9 @@ def fetch_mail():
 
     for email in emails:
         mails.append({
-            # "id": email["id"],
-            # "threadId": email["threadId"],
+            "id": email["id"],
             "sender": email["sender"],
+            "subject": email["subject"],
             "snippet": email["snippet"],
             })
         
