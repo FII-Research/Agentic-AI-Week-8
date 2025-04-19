@@ -3,6 +3,7 @@ from textwrap import dedent
 
 def gmail_reader_agent():
     llm = LLM(
+        api_key="", # groq API Key here
         model="groq/llama-3.3-70b-versatile",  # This is the correct format with groq/ prefix
         temperature=0.7
     )
@@ -21,6 +22,7 @@ def gmail_reader_agent():
 
 def email_drafter_agent():
     llm = LLM(
+        api_key="", # groq API Key here
         model="groq/llama-3.3-70b-versatile",
         temperature=0.7
     )
